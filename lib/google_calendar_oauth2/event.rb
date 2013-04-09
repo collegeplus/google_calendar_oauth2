@@ -7,8 +7,8 @@ module GoogleCalendar
       @connection = client.discovered_api('calendar', 'v3')
     end
 
-    def list(calendar)
-      list = @client.execute(api_method: @connection.events.list, parameters: { 'calendarId' => calendar.id })
+    def list(calendar_id)
+      list = @client.execute(api_method: @connection.events.list, parameters: { 'calendarId' => calendar_id })
       list.data.items
     end
 
@@ -21,11 +21,11 @@ module GoogleCalendar
       @event
     end
 
-    def find_by_id(calendar, id)
+    def find_by_id(calendar_id, id)
       @client.execute(
         api_method: @connection.events.get,
         parameters: {
-          'calendarId' => calendar.id, 'eventId' => id
+          'calendarId' => calendar_id, 'eventId' => id
         }).data
     end
 
@@ -39,13 +39,13 @@ module GoogleCalendar
         headers: {'Content-Type' => 'application/json'})
     end
 
-    def update(calendar, event_id, event)
-      sequence = self.find_by_id(calendar, event_id).sequence
+    def update(calendar_id, event_id, event)
+      sequence = self.find_by_id(calendar_id, event_id).sequence
       sequence = sequence.nil? ? 1 : sequence + 1
       @client.execute(
         api_method: @connection.events.update,
         parameters: {
-          'calendarId' => calendar.id, 'eventId' => event_id
+          'calendarId' => calendar_id, 'eventId' => event_id
         },
         body_object: event,
         headers: {'Content-Type' => 'application/json'})
