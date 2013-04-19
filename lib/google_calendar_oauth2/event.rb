@@ -7,13 +7,14 @@ module GoogleCalendar
       @connection = client.discovered_api('calendar', 'v3')
     end
 
-    def list(calendar_id)
-      list = @client.execute(api_method: @connection.events.list, parameters: { 'calendarId' => calendar_id })
+    def list(calendar_id, params = {})
+      params = params.merge(calendarId: calendar_id)
+      list = @client.execute(api_method: @connection.events.list, parameters: params)
       list.data.items
     end
 
-    def find_by_name(calendar, query)
-      list(calendar).each do |event|
+    def find_by_name(calendar_id, query)
+      list(calendar_id).each do |event|
         if event.summary == query
           return @event = event
         end
