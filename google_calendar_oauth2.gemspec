@@ -9,5 +9,5 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = '>= 1.3.6'
   s.files        = s.files = `git ls-files`.split("\n")
   s.require_path = 'lib'
-  s.add_dependency 'google-api-client'
+  s.add_dependency 'google-api-client', '~> 0.6.4'
 end
