@@ -22,19 +22,19 @@ module GoogleCalendar
       @event
     end
 
-    def find_by_id(calendar_id, id)
+    def find_by_id(calendar_id, event_id)
       @client.execute(
         api_method: @connection.events.get,
         parameters: {
-          'calendarId' => calendar_id, 'eventId' => id
+          'calendarId' => calendar_id, 'eventId' => event_id
         }).data
     end
 
-    def create(calendar, event)
+    def create(calendar_id, event)
       @client.execute(
         api_method: @connection.events.insert,
         parameters: {
-          'calendarId' => calendar.id
+          'calendarId' => calendar_id
         },
         body_object: event,
         headers: {'Content-Type' => 'application/json'})
@@ -52,11 +52,11 @@ module GoogleCalendar
         headers: {'Content-Type' => 'application/json'})
     end
 
-    def delete(calendar, event_id)
+    def delete(calendar_id, event_id)
       @client.execute(
         api_method: @connection.events.delete,
         parameters: {
-          'calendarId' => calendar.id,
+          'calendarId' => calendar_id,
           'eventId' => event_id
         })
     end
