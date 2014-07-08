@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0 - 2014-07-08
+
+### Added
+- Added `application_name` and `application_version` to Client initialization.
+
+### Deprecated
+- Changed `Client#redirect_to` to `Client#authorization_uri`.
+
+### Removed
+- Nothing.
+
+### Fixed
+- Nothing.
+
 ## 0.2.0 - 2014-07-03
 
 ### Added
