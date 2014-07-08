@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.1 - 2014-07-08
+
+### Added
+- Nothing.
+
+### Deprecated
+- Nothing.
+
+### Removed
+- Nothing.
+
+### Fixed
+- Events can be updated more than once now.
+
 ## 0.3.0 - 2014-07-08
 
 ### Added
