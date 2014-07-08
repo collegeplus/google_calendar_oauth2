@@ -41,14 +41,12 @@ module GoogleCalendar
     end
 
     def update(calendar_id, event_id, event)
-      sequence = self.find_by_id(calendar_id, event_id).sequence
-      sequence = sequence.nil? ? 1 : sequence + 1
+      sequence = find_by_id(calendar_id, event_id).sequence
+      new_sequence = sequence.nil? ? 1 : sequence + 1
       @client.execute(
         api_method: @connection.events.update,
-        parameters: {
-          'calendarId' => calendar_id, 'eventId' => event_id
-        },
-        body_object: event,
+        parameters: { 'calendarId' => calendar_id, 'eventId' => event_id },
+        body_object: event.merge('sequence' => new_sequence),
         headers: {'Content-Type' => 'application/json'})
     end
 
