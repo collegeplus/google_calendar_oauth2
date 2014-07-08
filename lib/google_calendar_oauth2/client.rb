@@ -7,8 +7,11 @@ module GoogleCalendar
     attr_accessor :connection
     HEADERS = {'Content-Type' => 'application/json', 'GData-Version' => '3.0'}
 
-    def initialize(client_id, client_secret, redirect_uri)
-      @client = Google::APIClient.new
+    def initialize(client_id, client_secret, redirect_uri, app_name, app_version)
+      @client = Google::APIClient.new(
+        application_name: app_name,
+        application_version: app_version
+      )
       @client.authorization.client_id = client_id
       @client.authorization.client_secret = client_secret
       @client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
@@ -16,8 +19,13 @@ module GoogleCalendar
       @connection = @client
     end
 
-    def redirect_to
+    def authorization_uri
       @client.authorization.authorization_uri.to_s
+    end
+
+    def redirect_to
+      warn 'WARNING: Client#redirect_to has been deprecated. Please use Client#authorization_uri'
+      authorization_uri
     end
 
     def calendars
