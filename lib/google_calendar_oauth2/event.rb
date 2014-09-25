@@ -33,21 +33,21 @@ module GoogleCalendar
     def create(calendar_id, event)
       @client.execute(
         api_method: @connection.events.insert,
-        parameters: {
-          'calendarId' => calendar_id
-        },
+        parameters: { 'calendarId' => calendar_id },
         body_object: event,
-        headers: {'Content-Type' => 'application/json'})
+        headers: {'Content-Type' => 'application/json'}
+      )
     end
 
-    def update(calendar_id, event_id, event)
-      sequence = find_by_id(calendar_id, event_id).sequence
-      new_sequence = sequence.nil? ? 1 : sequence + 1
+    def update(calendar_id, event)
+      sequence = event.sequence
+      event.sequence = sequence.nil? ? 1 : sequence + 1
       @client.execute(
         api_method: @connection.events.update,
-        parameters: { 'calendarId' => calendar_id, 'eventId' => event_id },
-        body_object: event.merge('sequence' => new_sequence),
-        headers: {'Content-Type' => 'application/json'})
+        parameters: { 'calendarId' => calendar_id, 'eventId' => event.id },
+        body_object: event,
+        headers: {'Content-Type' => 'application/json'}
+      )
     end
 
     def delete(calendar_id, event_id)
