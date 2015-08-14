@@ -14,7 +14,7 @@ All you need to survive a syncronization project with Google Calendar using GDat
     before do
       unless GoogleCalendar.connection.authorization.access_token || request.path_info =~ /^\/oauth2/
         redirect client.redirect_to
-      end 
+      end
     end
 
     get '/oauth2callback' do
@@ -30,7 +30,7 @@ All you need to survive a syncronization project with Google Calendar using GDat
     gem 'sinatra'
     gem 'google_calendar_oauth2'
 
-  Finally, run 
+  Finally, run
 
     bundle exec ruby application.rb
 
@@ -40,7 +40,8 @@ All you need to survive a syncronization project with Google Calendar using GDat
 
   Find a Calendar
 
-    calendar = GoogleCalendar::Calendar.find_by_name('Calendar Name')
+    calendar = GoogleCalendar::Calendar.find_by_summary('Calendar name')
+    calendar = GoogleCalendar::Calendar.find(calendar_id)
 
   List your Calendars
 

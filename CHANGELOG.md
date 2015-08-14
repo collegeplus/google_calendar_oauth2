@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 - 2015-08-14
+
+### Added
+- Calendar#find_by_summary allows users to find a calender by its summary. (The summary is what we think of as the calendar name).
+
+### Changes
+- Calendar#find expects a calendar_id instead of the summary.
+
 ## 0.3.2 - 2014-09-25
 
 ### Fixed

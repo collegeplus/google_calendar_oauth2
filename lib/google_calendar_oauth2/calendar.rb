@@ -12,13 +12,12 @@ module GoogleCalendar
       list.data.items
     end
 
-    def find(query)
-      list.each do |cal|
-        if cal.summary == query
-          return @cal = cal
-        end
-      end
-      @cal
+    def find(calendar_id)
+      client.execute(connection.calendar_list.get, calendarId: calendar_id).data
+    end
+
+    def find_by_summary(summary)
+      list.detect { |calendar| calendar.summary == summary }
     end
 
     def create(attrs)
