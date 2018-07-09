@@ -1,4 +1,5 @@
-require 'google/api_client'
+require 'google/apis/calendar_v3'
+require 'googleauth'
 require 'socket'
 
 module GoogleCalendar
@@ -8,7 +9,7 @@ module GoogleCalendar
     HEADERS = {'Content-Type' => 'application/json', 'GData-Version' => '3.0'}
 
     def initialize(client_id, client_secret, redirect_uri, app_name, app_version)
-      @client = Google::APIClient.new(
+      @client = Google::Apis::CalendarV3::CalendarService.new(
         application_name: app_name,
         application_version: app_version
       )

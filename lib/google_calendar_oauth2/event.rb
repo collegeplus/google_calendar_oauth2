@@ -4,7 +4,6 @@ module GoogleCalendar
 
     def initialize(client)
       @client = client
-      @connection = client.discovered_api('calendar', 'v3')
     end
 
     def list(calendar_id, params = {})
